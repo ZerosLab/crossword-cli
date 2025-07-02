@@ -1,0 +1,5 @@
+defslist=[
+    {
+        # "word":"definition"
+    }
+]
