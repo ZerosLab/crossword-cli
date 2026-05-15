@@ -1,12 +1,19 @@
 import defslist as d
 
 print("Select desired crossword puzzle difficulty (enter number between 1 and 10)")
-diff = int(input("> "))
+
+while not (diff) :
+    diff = (input("> "))
+    try:
+        diff = int(diff)
+    except:
+        
+
 
 emptySquare="[_]"
 nullSquare="[ ]"
 
-numWordsVert = int(diff*1.75)
+numWordsVert = int(diff*2)
 numWordsHoriz = diff*2
 
 i=0
