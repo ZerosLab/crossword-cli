@@ -4,8 +4,8 @@ from testCrossword import puzzle
 
 
 def main():
-    cwPuzzle = {"down":{"test": "an exam"},
-	"across":{"stay":"to remain"},
+    cwPuzzle = {"down":[["test", "an exam"]],
+	"across":[["stay","to remain"]],
 	"intersect":{"test":["stay",2,0]}}
     printCrossword(cwPuzzle,-1,-1,-1)
     takeTurn(cwPuzzle)
@@ -31,7 +31,12 @@ def takeTurn(cw):
             cont=True
         else:
             print("number out of range")
-
+    cont = False
+    while not cont:
+        guess = input("enter your guess")
+        if len(guess)!=len(cw[dir][num]):
+            print("Wrong length!")
+            
 
 def placeCrossword(cw,hinum,hidir,solves):
     placementChart = {}
