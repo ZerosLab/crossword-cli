@@ -7,8 +7,12 @@ def main():
     cwPuzzle = {"down":{"test": "an exam"},
 	"across":{"stay":"to remain"},
 	"intersect":{"test":["stay",2,0]}}
-    printCrossword(cwPuzzle,-1,-1,-1)
-    takeTurn(cwPuzzle)
+    done = False
+    while not done:
+        printCrossword(cwPuzzle,-1,-1,-1)
+        takeTurn(cwPuzzle)
+        if checkCorrectDone(cwPuzzle):
+            done=True
     return
 
 def takeTurn(cw):
@@ -31,7 +35,24 @@ def takeTurn(cw):
             cont=True
         else:
             print("number out of range")
+    cont = False
+    while not cont:
+        guess = input("make your guess: ")
+        if len(guess) == len(cw[dir][num]):
+            cw[dir][num].guess=guess
+            if checkvalid(cw):
+                cont=True
+            else:
+                cont=False
+                print("invalid overlap")
 
+
+def checkvalid(cw): # checks validity of guesses given overlaps in the puzzle.
+    return True
+            
+                            
+def checkCorrectDone(cw): #checks if puzzlr is finished and right
+    return False
 
 def placeCrossword(cw,hinum,hidir,solves):
     placementChart = {}
