@@ -6,7 +6,7 @@ from testCrossword import puzzle
 def main():
     cwPuzzle = {"down":[["test", "an exam",False]],
 	        "across":[["stay","to remain",False]],
-	"intersect":{"test":["stay",2,0]}}
+	"intersect":[["test","stay",2,0]]}
     #cwPuzzle = generateCrossword()
     done = False
     while not done:
@@ -52,17 +52,18 @@ def takeTurn(cw):
 
 def checkvalid(cw): # checks validity of guesses given overlaps in the puzzle.
     for word in cw["down"]:
-        if word[0] in cw["intersect"].keys():
-            crossWord = cw["intersect"][word[0]][0]
-            for palabra in cw["across"]:
-                if palabra[2] and word[2]:
-                    try:
-                        if palabra[2][cw["intersect"][word[2]][2]] != word[2][cw["intersect"][word[2]][1]]:
-                            #print(palabra[2][cw["intersect"][word[2]][2]])
-                            #print(word[2][cw["intersect"][word[2]][1]])
-                            return False
-                    except:
-                        print("error")
+        for potential in cw["intersect"]:
+            if word[0] == potential[0]:
+                crossWord = potential[0]
+                for palabra in cw["across"]:
+                    if palabra[2] and word[2]:
+                        try:
+                            if palabra[2][cw[potential[2]] != word[2][cw["intersect"][word[2]][1]]:
+                                #print(palabra[2][cw["intersect"][word[2]][2]])
+                                #print(word[2][cw["intersect"][word[2]][1]])
+                                return False
+                        except:
+                            print("error")
     return True
             
                             
@@ -99,7 +100,7 @@ def printCrossword(crossword,hinum,hidirecction,solves):
     puzzleArray = [["X"]*maxAcc]*maxDwn
     #place first down at 0,0
     placements[crossword["down"][0][0]]=(0,0,0)
-        
+    toPlace = []
     # figure first intersection, place and shift if necessary
     # loop 
     for row in puzzleArray:
